@@ -1,6 +1,6 @@
-from src.wrap.decorators.logger import logged
-from src.wrap.decorators.validator import validate_call_and_return
-from src.wrap.stack import MetaWrap
+from src.metatool_anbagu.wrap.decorators.logger import logged
+from src.metatool_anbagu.wrap.decorators.validator import validate_call_and_return
+from src.metatool_anbagu.wrap.stack import MetaWrap
 
 
 class MetaValidator(MetaWrap):

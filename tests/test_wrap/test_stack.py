@@ -1,6 +1,6 @@
 import pytest
 
-from src.wrap.stack import WrapStackPreparer
+from src.metatool_anbagu.wrap.stack import WrapStackPreparer
 
 @pytest.fixture(scope="function")
 def array_of_stack():
