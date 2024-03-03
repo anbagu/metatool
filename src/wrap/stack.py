@@ -1,6 +1,7 @@
 class WrapStackPreparer(dict):
 
-    def __init__(self, array_wraps):
+    def __init__(self, array_wraps=None):
+        array_wraps = array_wraps or []
         super().__init__()
         self.array_wraps = array_wraps
 
@@ -11,24 +12,29 @@ class WrapStackPreparer(dict):
         dict.__setitem__(self, key, value)
 
 
-class MetaBase(type):
-    array_wraps = None
-    def __add__(self, other):
-        array_wraps = self.array_wraps + other.array_wraps
-        merged = super(self).__init__()
-        merged.array_wraps = array_wraps
-        return merged
-
-# !todo wrap only stacks decorators decorator stack is defined on collections as an StackableWrapper class that allows sum()
 # !todo then add other meta tools
 # The metaclass
-class MetaWrap(MetaBase):
+class MetaWrap(type):
+    __array_wraps__ = None
+
+    def __init_subclass__(cls, **kwargs): ...
 
     @classmethod
     def __prepare__(metacls, name, bases, **kwargs):
-        array_wraps = kwargs.get('array_wraps', metacls.array_wraps) or []
-        return WrapStackPreparer(array_wraps)
+        metacls._init_array_wraps(**kwargs)
+        metacls._inherit_array_wraps()
+        return WrapStackPreparer(metacls.__array_wraps__)
 
-    def __new__(metacls, name, bases, classdict, **kwargs):
-        result = type.__new__(metacls, name, bases, classdict)
+    def __new__(metacls, name, bases, class_dict, **kwargs):
+        result = super().__new__(metacls, name, bases, class_dict)
         return result
+
+    @classmethod
+    def _init_array_wraps(metacls, array_wraps=None):
+        metacls.__array_wraps__ = array_wraps or []
+
+    @classmethod
+    def _inherit_array_wraps(metacls):
+        for metabase in metacls.__bases__:
+            if getattr(metabase, '__array_wraps__', None) is not None:
+                metacls.__array_wraps__ += metabase.__array_wraps__
