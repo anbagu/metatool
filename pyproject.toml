@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "metatool_anbagu"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
-  { name="Antoni Bayo Guardiola", email="bayocostur@gmail.com" },
+    { name = "Antoni Bayo Guardiola", email = "bayocostur@gmail.com" },
 ]
 description = "Tool for metaprogramming empowering"
 readme = "README.md"
@@ -18,8 +18,8 @@ classifiers = [
 ]
 dynamic = ["dependencies", "optional-dependencies"]
 [tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
-optional-dependencies = {dev = { file = ["requirements.txt"] }}
+dependencies = { file = ["requirements.txt"] }
+optional-dependencies = { dev = { file = ["requirements.txt"] } }
 
 [project.urls]
 Homepage = "https://github.com/anbagu/metatool"
