@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=59.6.0", "-r requirements.txt"]
+requires = ["setuptools>=59.6.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -16,6 +16,10 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dynamic = ["dependencies", "optional-dependencies"]
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+optional-dependencies = {dev = { file = ["requirements.txt"] }}
 
 [project.urls]
 Homepage = "https://github.com/anbagu/metatool"
