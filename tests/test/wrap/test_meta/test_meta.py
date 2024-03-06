@@ -3,7 +3,7 @@ import logging
 import pytest
 from pydantic import ValidationError
 
-from src.metatool_anbagu.wrap.meta import MetaLoggerValidator
+from src.metatool_anbagu.wrap.meta.meta import MetaLoggerValidator
 
 
 @pytest.fixture(scope="function")
